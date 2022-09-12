@@ -2,28 +2,7 @@
 <html>
 <head>
     <title>JS-EMPLOYEE-DETAILS</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 <style>
-.add{
-background-color:#5cb85c;
-color:white;
-}
-
-th{
- text-align:center;
- color:#566787;
-}
-
-.btn{
-padding:3px 20px;
-min-width: 90px;
-}
-
-.btn-primary{
-color:#fff;
-background-color:#337a7b;
-}
-
 .form-wrapper{
 display: none;
 }
@@ -41,7 +20,7 @@ background-color:rgba(0,0,0,0.6);
 z-index:100;
 }
 
-.mobileForm{
+.popup{
 background-color:white;
 width:600px;
 padding:20px 50px;
@@ -72,105 +51,104 @@ margin:20px;
 </style>
 </head>
 <body>
-    <h1>Employee Information</h1>
-    <table>
-        <form>
-            <tr>
-                <td>
-                    <fieldset>
-                        <table id="Addemployee">
-                            <tr>
-                                <th colspan="2">Add Employees</th>
-                            </tr>
-                            <tr>
-                                <td>First name</td>
-                                <td><input type="text" id="first_name" name="first_name"/></td>
-                            </tr>
-                            <tr>
-                                <td>Last name</td>
-                                <td><input type="text" id="last_name" name="last_name"/></td>
-                            </tr>
-                            <tr>
-                                <td>Email</td>
-                                <td><input type="text" id="email" name="email"/></td>
-                            </tr>
-                            <tr>
-                                <td>JOB</td>
-                                <td><input type="text" id="hire" name="hire"/></td>
-                            </tr>
-                            <tr>
-                                <td>Salary</td>
-                                <td><input type="text" id="salary" name="salary" calculate="Sum"/></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="button" id="submit" name="submit" value="Addemployee" onclick="addRecord()" /></td>
-                                    <td id="error_msg"></td>
-                                </tr>
-                            </table>
-                        </fieldset>
-                    </td>
-                    <td valign="top" width="100%">
-                        <fieldset>
-                            <table id="employee_table" border="1" cellpadding="5px" style="border-collapse:collapse" width="100%">
-                                <tr>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Email</th>
-                                    <th>JOB</th>
-                                    <th>Salary</th>
-                                    <th></th>
-                                    <th></th> 
-                                </tr>
-                                <tr>
-                                  <td>RAMU</td>
-                                  <td>RAO</td>
-                                  <td>ramu@gmail.com</td>
-                                  <td>BPO</td>
-                                  <td>200</td>
-                                  <td class="btn btn-primary">EDIT</td>
-                                  <td class="btn btn-danger">DELETE</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4" id="price">Total</td> 
-                                    <td id="total"></td>
-                                </tr>
-                            </table>
-                          <div class="form-wrapper">
-                           <div class="mobileForm">
-                            <div class="group">
-                             <label for="mobile">First Name</label>
-                             <input type="text" class="form-control" id="mobile" require minlength="3">
-                            </div>
-                            <div class="group">
-                            <label for="mobile">Last Name</label>
-                            <input type="text" class="form-control" id="name" required minlength="3">
-                            </div>
-                            <div class="group">
-                            <label for="mobile">Email</label>
-                            <input type="text" class="form-control" id="name" required minlength="3">
-                            </div>
-                            <div class="group">
-                            <label for="mobile">JOB</label>
-                            <input type="text" class="form-control" id="name" required minlength="2">
-                            </div>
-                            <div class="group">
-                            <label for="mobile">salary</label>
-                            <input type="text" class="form-control" id="salary" required minlength="1">
-                            </div>
-                            <div class="action">
-                            <button class="btn btn-primary update">UPDATE</button>
-                            <button class="btn btn-danger cancel">Cancel</button>
-                            </div>
-                           </div>
-                          </div>  
-                        </fieldset>
-                    </td>
-                </tr> 
-            </form>
-        </table>
-    </body>
-    <Script>
+<h1>Employee Information</h1>
+<table>
+<form>
+<tr>
+<td>
+<fieldset>
+<table id="Addemployee">
+<tr>
+<th colspan="2">Add Employees</th>
+</tr>
+<tr>
+<td>First name</td>
+<td><input type="text" id="first_name" name="first_name"/></td>
+</tr>
+<tr>
+<td>Last name</td>
+<td><input type="text" id="last_name" name="last_name"/></td>
+</tr>
+<tr>
+<td>Email</td>
+<td><input type="text" id="email" name="email"/></td>
+</tr>
+<tr>
+<td>JOB</td>
+<td><input type="text" id="hire" name="hire"/></td>
+</tr>
+<tr>
+<td>Salary</td>
+<td><input type="text" id="salary" name="salary" calculate="Sum"/></td>
+</tr>
+<tr>
+<td>
+<input type="button" id="submit" name="submit" value="Addemployee" onclick="addRecord()" /></td>
+<td id="error_msg"></td>
+</tr>
+</table>
+</fieldset>
+</td>
+<td valign="top" width="100%">
+<fieldset>
+<table id="employee_table" border="1" cellpadding="5px" style="border-collapse:collapse" width="100%">
+<tr>
+<th>First Name</th>
+<th>Last Name</th>
+<th>Email</th>
+<th>JOB</th>
+<th>Salary</th>
+<th>Edit-EMPLOYEE</th>
+<th>DELETE</th> 
+</tr>
+<tr>
+<td> Homer</td>
+<td>Simpson</td>
+<td>HSimpson@gmail.com</td>
+<td>01/01/2016</td>
+<td>$1,000,000</td>
+<td><input type='button' value='Edit employee' onclick='editRecord(this)'/></td>
+<td><input type='button' value='Delete user' onclick='deleteRecord(this)' style='background-color:red' /></td>
+<tr>
+<td colspan="4" id="price">Total</td> 
+<td id="total"></td>
+</tr>
+</table>
+<div class="form-wrapper">
+<div class="popup">
+<div class="popup">
+<label for="popup">First Name</label>
+<input type="text" class="form-control" id="popup" require minlength="3">
+</div>
+<div class="popup">
+<label for="popup">Last Name</label>
+<input type="text" class="form-control" id="name" required minlength="3">
+</div>
+<div class="popup">
+<label for="popup">Email</label>
+<input type="text" class="form-control" id="name" required minlength="3">
+</div>
+<div class="popup">
+<label for="popup">JOB</label>
+<input type="text" class="form-control" id="name" required minlength="2">
+</div>
+<div class="popup">
+<label for="popup">salary</label>
+<input type="text" class="form-control" id="salary" required minlength="1">
+</div>
+<div class="popup">
+<button class="btn btn-primary update" cursor:"pointer">UPDATE</button>
+<button class="btn btn-danger cancel" cursor:"pointer">Cancel</button>
+</div>
+</div>
+</div>
+</fieldset>
+</td>
+</tr> 
+</form>
+</table>
+</body>
+<Script>
         var totalSalaries = 0;
         function addRecord() {
             let fName = document.getElementById("first_name").value;
@@ -182,10 +160,6 @@ margin:20px;
             let table = document.getElementById("employee_table");
             let error_msg = document.getElementById("error_msg");
             let total = document.getElementById("price");
-            let addBtn = document.getElementById("add");
-            let form = document.getElementById("form-wrapper");
-            let updatebtn = document.getElementById("update");
-            let cancebtn = document.getElementById("cancel");
             let row;
             let cell1;
             let cell2;
@@ -207,8 +181,8 @@ margin:20px;
             cell3.innerHTML = email.value;
             cell4.innerHTML = hire.value;
             cell5.innerHTML = salary.value;
-            //cell6.innerHTML = "<input type='button' value='Edit employee' onclick='editRecord(this)'/>";
-            //cell7.innerHTML = "<input type='button' value='Delete user' onclick='deleteRecord(this)' style='background-color:red' />";
+            cell6.innerHTML = "<input type='button' value='Edit employee' onclick='editRecord(this)'/>";
+            cell7.innerHTML = "<input type='button' value='Delete user' onclick='deleteRecord(this)' style='background-color:red' />";
             let newSalary = JSON.parse(salary.value)
             totalSalaries = totalSalaries + newSalary
             document.getElementById("total").innerHTML = totalSalaries
@@ -231,24 +205,21 @@ margin:20px;
             let total = document.getElementById("price"); 
             selectedRow = null;
         }
-//         function deleteRecord(button) {
-//       var table = document.getElementById("employee_table");
-//       var row = button.parentNode.parentNode;
-//      table.deleteRow(row.rowIndex);
-//     }
+        function deleteRecord(button) {
+      var table = document.getElementById("employee_table");
+      var row = button.parentNode.parentNode;
+     table.deleteRow(row.rowIndex);
+    }
 //     function editRecord(button) {
 //   var row = button.parentNode.parentNode;
 //   var td_array = row.children;
-//   for (i = 0; i < td_array.length - 2; i++) { //the '- 2' is added so the 'edit' and 'delete' buttons won't become editable
+//   for (i = 0; i < td_array.length - 2; i++) { 
 //     td_array[i].setAttribute("contenteditable", "true");
 //     td_array[i].style.backgroundColor = "lightblue";
 //   }
 //     }
-
-iif(data.length>0);{
-for(i=0;i<data.length;i++){
-    
-data+= `<tr>
+function onClick(){
+edit+= `<tr>
            <td>{data[i]['First Name]}</td>
             <td>{data[i]['Last Name]}</td>
             <td>{data[i]['Email]}</td>
@@ -257,13 +228,6 @@ data+= `<tr>
             <td><button class="btn btn-primary" onclick="edit">EDIT</button></td>
             <td><button class="btn btn-danger" onclick="delete">DELETE</button></td>
             </tr>`;
-}
-addBtn.onclick = function(){
-form.classList.add('active')
-}
-cancelBtn.onclick = function(){
-form.classList.remove('active')
-}
-}
+        }
 </Script>
-</html>
+</htmlfunction popup(){>
