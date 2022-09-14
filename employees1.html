@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Document</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+<div class="title text-center">
+<h1>Employee Manager</h1>
+      </div>
+      <div class="main row">
+        <div class="col-sm-12 col-md-4">
+          <form id="employee-form" autocomplete="off">
+            <div class="form-group">
+              <label for="fName">First Name</label>
+              <input type="text" id="fName" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="lName">Last Name</label>
+              <input type="text" id="lName" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" id="email" class="form-control">
+            </div>
+            <div class="form-group">
+            <label for="job">JOB</label>
+            <input type="text" id="job" class="form-control">
+            </div>
+            <div class="form-group">
+            <label for="salary">SALARY</label>
+            <Input type="text" id="salary" class="form-control">
+            </div>
+  <!--      <input type="submit" value="Edit employee" class="btn btn-success btn-block edit-btn" disabled> -->
+            <input type="Submit" value="AddEmployee" class="btn btn-success btn-block add-btn sumbit_btn">
+          </form>
+        </div>
+        <div class="col-sm-12 col-md-8">
+          <table class="table table-striped mt-5">
+            <thead>
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>JOB</th>
+                <th>Salary</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="employee-list">
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </div>    
+</body>
+<script>
+var selectedRow=null;
+class Employee{
+constructor(fName, lName, email, job, salary){
+         this.fName=fName;
+         this.lName=lName;
+         this.email=email;
+         this.job=job;
+         this.salary=salary;
+     }
+ }
+
+ class UI{
+  static displayemployee(){
+        const StoreEmp=[
+            {
+                fName: 'Book One',
+                lName: 'John Doe',
+                email: 'Books@gmail.com',
+                job:'MANAGER',
+                salary:'2000'    
+            },
+             {
+                fName: 'Book Two',
+                lName: 'John Doe',
+                email: 'Books@gmail.com',
+                job:'DEVELOPER',
+                salary:'3000'    
+            }
+        ];
+        const employee= StoreEmp;
+
+        employee.forEach((book)=> UI.AddEmployeeToList(book));
+    }
+
+
+     static AddEmployeeToList(employee){
+         const list=document.querySelector("#employee-list");
+         const row=document.createElement("tr");
+         row.innerHTML=`
+         <td>${employee.fName}</td>
+         <td>${employee.lName}</td>
+         <td>${employee.email}</td>
+         <td>${employee.job}</td>
+         <td>${employee.salary}</td>
+         <td><a href="#" class="btn btn-success btn-sm edit">Edit</a></td>
+         <td><a href="#" class="btn btn-danger btn-sm delete">Delete</a></td>
+         `
+         list.appendChild(row);
+     }
+
+     static editEmployeeToList(employee){
+         selectedRow.children[0].textContent= employee.fName;
+         selectedRow.children[1].textContent= employee.lName;
+         selectedRow.children[2].textContent= employee.email;
+         selectedRow.children[3].textContent= employee.job;
+         selectedRow.children[4].textContent= employee.salary;
+        document.querySelector(".sumbit_btn").value="Submit";
+         document.querySelector(".sumbit_btn").classList="btn btn-success btn-block add-btn sumbit_btn";
+     }
+     static deleteEmpyee(el){
+         if(el.classList.contains("delete")){
+             el.parentElement.parentElement.remove();
+             UI.showAlert("Employee deleted", "danger");
+         }else{
+             null;
+         }
+     }
+
+// popunjavanje input polja sa podacima iz zeljenog reda
+     static editEmployee(el){
+         if(el.classList.contains('edit')){
+             selectedRow= el.parentElement.parentElement;
+             document.querySelector("#fName").value= selectedRow.children[0].textContent;
+             document.querySelector("#lName").value= selectedRow.children[1].textContent;
+             document.querySelector("#email").value= selectedRow.children[2].textContent;
+             document.querySelector("#job").value= selectedRow.children[3].textContent;
+             document.querySelector("#salary").value= selectedRow.children[4].textContent;
+
+             document.querySelector(".sumbit_btn").value="Update";
+             document.querySelector(".sumbit_btn").classList="btn btn-primary btn-block add-btn sumbit_btn";
+         }else{null}
+     }
+
+// // message toast
+// static showAlert(message, className) {
+//     const div = document.createElement('div');
+//     div.className = `alert alert-${className}`;
+//     div.appendChild(document.createTextNode(message));
+//     const container = document.querySelector('.container');
+//     const main = document.querySelector('.main');
+//     container.insertBefore(div, main);
+//     div.style.position = "absolute";
+//     div.style.top = "30px";
+//     div.style.left = "90%";
+//     setTimeout(() => document.querySelector('.alert').remove(), 3000);
+//   }
+
+// reset fields
+  static clearFields() {
+    document.querySelector('#fName').value = '';
+    document.querySelector('#lName').value = '';
+    document.querySelector('#email').value = '';
+    document.querySelector('#job').value = '';
+    document.querySelector('#salary').value = '';
+  }
+ }
+ document.addEventListener('DOMCOntentLoaded', UI.displayemployee);
+ document.querySelector('#employee-form').addEventListener('submit', (e) => {
+ const fName = document.querySelector('#fName').value;
+ const lName = document.querySelector('#lName').value;
+ const email = document.querySelector('#email').value;
+ const job = document.querySelector('#job').value;
+ const salary = document.querySelector('#salary').value;
+
+ if(fName === '' || lName === '' || email ===  '' || job === '' || salary === '' ) {
+  UI.showAlert('Please fill in all fields', 'danger');
+ } else {
+ const employee = new Employee(fName,lName.email,job,salary);
+ if(selectedRow === null){
+  UI.AddEmployeeToList(employee);
+    selectedRow = null;
+    UI.showAlert('Employee Added', 'success');
+  } else {
+    UI.editEmployeeToList(employee);
+    selectedRow = null;
+    UI.showAlert('Employee Info Edited', 'info');
+  }
+    UI.clearFields();
+  }
+});
+
+document.querySelector('#employee-list').addEventListener('click', (e) => {
+  UI.deleteEmpyee(e.target);
+  UI.editEmployee(e.target);
+});
+</script>
+</html>
